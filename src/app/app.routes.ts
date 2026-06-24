@@ -3,11 +3,35 @@ import { NotFoundPage } from './pages/not-found-page/not-found-page';
 
 export const routes: Routes = [
 
-    {path: '', redirectTo : '/home', pathMatch: 'full'},
+    {path: '', redirectTo : '/process/home', pathMatch: 'full'},
 
     {
-        path: 'home',
-        loadComponent: () => import('./pages/home-page/home-page').then((e) => e.HomePage)   
+        path: 'process',
+        loadComponent: () => import('./pages/home-context/home-context').then((e) => e.HomeContext),
+        
+        children: [
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            
+            {
+                path: 'home',
+                loadComponent: () => import('./pages/home-page/home-page').then((e) => e.HomePage),
+            },
+
+            {
+                path: 'fleet',
+                loadComponent: () => import('./pages/fleet-page/fleet-page').then((e) => e.FleetPage),
+            },
+
+            {
+                path: 'about',
+                loadComponent: () => import('./pages/about-page/about-page').then((e) => e.AboutPage),
+            },
+
+            {
+                path: 'contact',
+                loadComponent: () => import('./pages/contact-page/contact-page').then((e) => e.ContactPage),
+            },
+        ]   
     },
 
     {
@@ -15,7 +39,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/auth/auth').then((e) => e.Auth), 
         
         children:[
-            {path: '', redirectTo : '/auth/login', pathMatch: 'full'},
+            {path: '', redirectTo : 'login', pathMatch: 'full'},
 
             {
                 path: 'register',
