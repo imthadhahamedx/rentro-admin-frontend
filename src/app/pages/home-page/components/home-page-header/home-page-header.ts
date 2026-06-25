@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface NavLink {
   href: string;
@@ -10,7 +10,7 @@ interface NavLink {
 
 @Component({
   selector: 'app-home-page-header',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './home-page-header.html',
   styleUrl: './home-page-header.scss',
 })
