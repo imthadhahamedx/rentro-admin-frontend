@@ -1,0 +1,77 @@
+// ─── Tokens (mapped to global CSS vars) ───────────────────────
+$header-bg:      #1e2d3d;          // dark navy, one step deeper than --midnight-blue
+$header-border:  rgba(#fff, 0.06);
+$brand:          #00c9a7;          // DrivePro teal (close to --turquoise)
+$nav-text:       rgba(#fff, 0.70);
+$header-height:  64px;
+$max-width:      1280px;
+
+// ─── Host ──────────────────────────────────────────────────────
+:host {
+  display: block;
+}
+
+// ─── Shell ─────────────────────────────────────────────────────
+.auth-header {
+  background-color: $header-bg;
+  border-bottom: 1px solid $header-border;
+  padding: 0 2rem;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+}
+
+// ─── Inner layout ──────────────────────────────────────────────
+.header-inner {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ─── Logo ──────────────────────────────────────────────────────
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 32px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+// ─── Nav ───────────────────────────────────────────────────────
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-item {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $nav-text;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover,
+  &.active {
+    color: $brand;
+    border-bottom-color: $brand;
+  }
+}

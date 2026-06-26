@@ -1,8 +1,19 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { RegisterRequestDto } from '../../dto/registerRequestDto';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  
+  httpClient = inject(HttpClient);
+
+  private authUrl = `${environment.BASEURL}/auth/register`;
+
+  public register(registerRequestDto:RegisterRequestDto):Observable<any>{
+    return this.httpClient.post(this.authUrl,registerRequestDto);
+  }
 }

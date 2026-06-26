@@ -1,0 +1,284 @@
+// ─── Tokens ────────────────────────────────────────────────────
+// Brand colours (your DrivePro teal sits between --turquoise and --green-sea)
+$brand:           #00c9a7;
+$brand-hover:     #00b597;
+$brand-shadow:    rgba(#00c9a7, 0.35);
+$brand-tint:      rgba(#00c9a7, 0.06);
+
+// Page gradient mirrors the navy tones from --wet-asphalt / --midnight-blue
+$page-grad-start: #1a2a3a;
+$page-grad-mid:   #243447;
+$page-grad-end:   #1a2f3c;
+
+// Card
+$card-bg:         #ffffff;
+$card-radius:     16px;
+$card-shadow:     0 24px 64px rgba(#000, 0.28);
+
+// Text
+$title-color:     #1a2a3a;
+$subtitle-color:  #6b7c93;   // close to --concrete
+$icon-color:      #8a9bb0;
+$body-muted:      #4a5568;
+$meta-muted:      #9aabb8;
+
+// Divider
+$divider-color:   #e4eaf0;
+
+// Error
+$error-color:     #e53e3e;   // close to --alizarin
+
+// ─── Page shell ────────────────────────────────────────────────
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, $page-grad-start 0%, $page-grad-mid 60%, $page-grad-end 100%);
+}
+
+.register-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+// ─── Card ──────────────────────────────────────────────────────
+.register-card {
+  background: $card-bg;
+  border-radius: $card-radius;
+  padding: 2.5rem 2.25rem 2rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: $card-shadow;
+}
+
+// ─── Brand mark ────────────────────────────────────────────────
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $brand;
+  display: inline-block;
+}
+
+.brand-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $brand;
+}
+
+// ─── Headings ──────────────────────────────────────────────────
+.card-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: $title-color;
+  margin: 0 0 0.35rem;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: $subtitle-color;
+  margin: 0 0 1.75rem;
+}
+
+// ─── Form layout ───────────────────────────────────────────────
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.name-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.half-width {
+  flex: 1;
+  min-width: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// ─── Field prefix icons ────────────────────────────────────────
+.field-prefix-icon {
+  font-size: 18px;
+  color: $icon-color;
+  margin-right: 4px;
+}
+
+// ─── Angular Material overrides ────────────────────────────────
+// Focused outline + label
+::ng-deep .mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: $brand !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: $brand !important;
+  }
+}
+
+// Checkbox
+::ng-deep .mat-mdc-checkbox.mat-primary {
+  .mdc-checkbox__background {
+    border-color: $brand !important;
+  }
+
+  &.mdc-checkbox--selected .mdc-checkbox__background {
+    background-color: $brand !important;
+    border-color: $brand !important;
+  }
+}
+
+// ─── Visibility toggle ─────────────────────────────────────────
+.visibility-toggle {
+  color: $icon-color;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $brand;
+  }
+}
+
+// ─── Terms ─────────────────────────────────────────────────────
+.terms-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.terms-checkbox {
+  align-items: flex-start;
+}
+
+.terms-text {
+  font-size: 0.82rem;
+  color: $body-muted;
+  line-height: 1.5;
+}
+
+.terms-link {
+  color: $brand;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+  }
+}
+
+.terms-error {
+  font-size: 0.75rem;
+  color: $error-color;
+  margin-left: 0.25rem;
+}
+
+// ─── Register button ───────────────────────────────────────────
+.btn-register {
+  width: 100%;
+  height: 48px;
+  background-color: $brand !important;
+  color: #fff !important;
+  font-size: 0.925rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 8px !important;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover:not([disabled]) {
+    background-color: $brand-hover !important;
+    box-shadow: 0 4px 16px $brand-shadow;
+  }
+
+  &[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.btn-spinner {
+  --mdc-circular-progress-active-indicator-color: #ffffff;
+}
+
+// ─── Divider ───────────────────────────────────────────────────
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: $divider-color;
+}
+
+.divider-text {
+  font-size: 0.78rem;
+  color: $meta-muted;
+  white-space: nowrap;
+}
+
+// ─── Sign-in button ────────────────────────────────────────────
+.btn-login {
+  width: 100%;
+  height: 46px;
+  border-color: $brand !important;
+  color: $brand !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $brand-tint !important;
+  }
+}
+
+// ─── Responsive ────────────────────────────────────────────────
+@media (max-width: 520px) {
+  .register-card {
+    padding: 2rem 1.25rem 1.5rem;
+    border-radius: 12px;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  .name-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
