@@ -1,0 +1,219 @@
+// ─── Brand accent ─────────────────────────────────────────────────────────────
+// #00c9a7 is not in the global palette — add to :root in styles.scss if reused.
+$brand:        #00c9a7;
+$brand-hover:  #00b597;
+$brand-shadow: rgba(0, 201, 167, 0.35);
+
+// ─── Block: login ─────────────────────────────────────────────────────────────
+.login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #1a2a3a 0%, #243447 60%, #1a2f3c 100%);
+
+  // ── Element: main ───────────────────────────────────────────────────────────
+  &__main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem;
+  }
+
+  // ── Element: card ───────────────────────────────────────────────────────────
+  &__card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 2.25rem 2rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  }
+
+  // ── Element: brand ──────────────────────────────────────────────────────────
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  &__brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $brand;
+    display: inline-block;
+  }
+
+  &__brand-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $brand;
+  }
+
+  // ── Element: headings ───────────────────────────────────────────────────────
+  &__title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--midnight-blue);
+    margin: 0 0 0.35rem;
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: var(--asbestos);
+    margin: 0 0 1.75rem;
+  }
+
+  // ── Element: form ───────────────────────────────────────────────────────────
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  // ── Element: field ──────────────────────────────────────────────────────────
+  &__field {
+    width: 100%;
+  }
+
+  &__field-icon {
+    font-size: 18px;
+    color: var(--concrete);
+    margin-right: 4px;
+  }
+
+  // ── Element: visibility toggle ──────────────────────────────────────────────
+  &__visibility-btn {
+    color: var(--concrete);
+    transition: color 0.2s;
+
+    &:hover {
+      color: $brand;
+    }
+  }
+
+  // ── Element: forgot password ────────────────────────────────────────────────
+  &__forgot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__forgot-link {
+    font-size: 0.8rem;
+    color: $brand;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.75;
+      text-decoration: underline;
+    }
+  }
+
+  // ── Element: buttons ────────────────────────────────────────────────────────
+  &__btn {
+    width: 100%;
+    font-weight: 600;
+    border-radius: 8px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+
+    // Modifier: primary (Sign in)
+    &--primary {
+      height: 48px;
+      background-color: $brand !important;
+      color: #ffffff !important;
+      font-size: 0.925rem;
+      letter-spacing: 0.03em;
+      margin-top: 0.5rem;
+      gap: 0.5rem;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover:not([disabled]) {
+        background-color: $brand-hover !important;
+        box-shadow: 0 4px 16px $brand-shadow;
+      }
+
+      &[disabled] {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+
+    // Modifier: outline (Create account)
+    &--outline {
+      height: 46px;
+      border-color: $brand !important;
+      color: $brand !important;
+      font-size: 0.9rem;
+      gap: 0.4rem;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 201, 167, 0.06) !important;
+      }
+    }
+  }
+
+  // ── Element: spinner ────────────────────────────────────────────────────────
+  &__spinner {
+    --mdc-circular-progress-active-indicator-color: #ffffff;
+  }
+
+  // ── Element: divider ────────────────────────────────────────────────────────
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  &__divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--clouds);
+  }
+
+  &__divider-text {
+    font-size: 0.78rem;
+    color: var(--silver);
+    white-space: nowrap;
+  }
+}
+
+// ─── Angular Material focus override ─────────────────────────────────────────
+::ng-deep .mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: $brand !important;
+  }
+
+  .mat-mdc-floating-label {
+    color: $brand !important;
+  }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+@media (max-width: 480px) {
+  .login {
+    &__card {
+      padding: 2rem 1.25rem 1.5rem;
+      border-radius: 12px;
+    }
+
+    &__title {
+      font-size: 1.4rem;
+    }
+  }
+}

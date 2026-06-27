@@ -1,1 +1,91 @@
-<p>login-page works!</p>
+<div class="login">
+  <main class="login__main">
+    <div class="login__card">
+
+      <!-- Brand mark -->
+      <div class="login__brand">
+        <span class="login__brand-dot"></span>
+        <span class="login__brand-label">Car Rental</span>
+      </div>
+
+      <h1 class="login__title">Welcome back</h1>
+      <p class="login__subtitle">Sign in to manage your bookings and fleet.</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login__form" novalidate>
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="login__field">
+          <mat-label>Email address</mat-label>
+          <mat-icon matPrefix class="login__field-icon">mail_outline</mat-icon>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          />
+          <mat-error *ngIf="loginForm.get('email')?.touched">
+            {{ getEmailError() }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="outline" class="login__field">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix class="login__field-icon">lock_outline</mat-icon>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="Min. 8 characters"
+            autocomplete="current-password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+            class="login__visibility-btn"
+          >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.touched">
+            {{ getPasswordError() }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Forgot password -->
+        <div class="login__forgot">
+          <a routerLink="/forgot-password" class="login__forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Submit button -->
+        <button
+          mat-flat-button
+          type="submit"
+          class="login__btn login__btn--primary"
+          [disabled]="isLoading"
+        >
+          <mat-spinner *ngIf="isLoading" diameter="18" class="login__spinner"></mat-spinner>
+          <span *ngIf="!isLoading">Sign in</span>
+        </button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="login__divider">
+        <span class="login__divider-line"></span>
+        <span class="login__divider-text">Don't have an account?</span>
+        <span class="login__divider-line"></span>
+      </div>
+
+      <!-- Register button -->
+      <a routerLink="/auth/register" mat-stroked-button class="login__btn login__btn--outline">
+        <mat-icon>person_add_alt_1</mat-icon>
+        Create an account
+      </a>
+
+    </div>
+  </main>
+</div>
