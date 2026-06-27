@@ -11,7 +11,9 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
   httpClient = inject(HttpClient);
 
-  private authUrl = `${environment.BASEURL}/auth/register`;
+  private baseUrl = environment.BASEURL;
+
+  private authUrl = `${this.baseUrl}/auth/register`;
 
   public register(registerRequestDto:RegisterRequestDto):Observable<any>{
     return this.httpClient.post(this.authUrl,registerRequestDto);

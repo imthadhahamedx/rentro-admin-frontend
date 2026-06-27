@@ -89,14 +89,21 @@ export class RegisterPage implements OnInit {
     };
  
     this.authService.register(user).subscribe({
-      next: (e) => {
-        if (e.status) {
-          this.router.navigateByUrl('/auth/login');
-        }
+      next: () => {
+        this.isLoading = false;
+        this.router.navigateByUrl('/auth/login');
       },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+      }
     });
+
+    /*setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);*/
   }
- 
+
   // ─── Error helpers ─────────────────────────────────────────────
   getFirstNameError(): string {
     const c = this.registerForm.get('firstName');
