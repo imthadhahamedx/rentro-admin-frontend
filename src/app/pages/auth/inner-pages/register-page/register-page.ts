@@ -55,7 +55,7 @@ export class RegisterPage implements OnInit {
         firstName:       ['', [Validators.required, Validators.minLength(2)]],
         lastName:        ['', [Validators.required, Validators.minLength(2)]],
         email:           ['', [Validators.required, Validators.email]],
-        phone:           ['', [Validators.pattern(/^(?:\+94|0)[0-9]{9}$/)]],
+        phoneNumber:     ['', [Validators.pattern(/^(?:\+94|0)[0-9]{9}$/)]],
         password:        ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required]],
         agreeTerms:      [false, [Validators.requiredTrue]],
@@ -127,7 +127,7 @@ export class RegisterPage implements OnInit {
   }
  
   getPhoneError(): string {
-    const c = this.registerForm.get('phone');
+    const c = this.registerForm.get('phoneNumber');
     if (c?.hasError('required')) return 'Phone number is required';
     if (c?.hasError('pattern'))  return 'Enter a valid Sri Lankan number (e.g. 077 123 4567)';
     return '';
