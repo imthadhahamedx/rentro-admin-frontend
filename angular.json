@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "rentro-admin": {
+    "rentro-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
