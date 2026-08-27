@@ -67,10 +67,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rentro-admin:build:production"
+              "buildTarget": "rentro-client:build:production"
             },
             "development": {
-              "buildTarget": "rentro-admin:build:development"
+              "buildTarget": "rentro-client:build:development"
             }
           },
           "defaultConfiguration": "development"

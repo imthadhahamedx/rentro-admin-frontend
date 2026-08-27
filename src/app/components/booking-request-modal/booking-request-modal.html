@@ -1,0 +1,137 @@
+<div class="bm-overlay" [class.bm-overlay--open]="isOpen" (click)="onOverlayClick($event)">
+  <div class="bm-panel" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+
+    <!-- ── Header ── -->
+    <div class="bm-header">
+      <h3 class="bm-title" id="bm-title">Request Booking</h3>
+      <button class="bm-close" (click)="close()" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ── Success Screen ── -->
+    <div class="bm-success" *ngIf="successData">
+      <div class="bm-success__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h4 class="bm-success__heading">Booking request sent!</h4>
+      <p class="bm-success__sub">
+        Our team will contact you shortly to confirm your booking.
+      </p>
+      <div class="bm-success__details">
+        <div class="bm-success__row">
+          <span>Reference</span>
+          <strong>{{ successData.bookingRef }}</strong>
+        </div>
+        <div class="bm-success__row">
+          <span>Vehicle</span>
+          <strong>{{ successData.vehicleName }}</strong>
+        </div>
+        <div class="bm-success__row">
+          <span>Period</span>
+          <strong>{{ successData.pickupDate | date:'mediumDate' }} – {{ successData.returnDate | date:'mediumDate' }}</strong>
+        </div>
+        <div class="bm-success__row">
+          <span>Estimated total</span>
+          <strong>{{ formatPrice(successData.estimatedAmount) }}</strong>
+        </div>
+      </div>
+      <button class="bm-btn bm-btn--primary" (click)="close()">Done</button>
+    </div>
+
+    <!-- ── Form Screen ── -->
+    <div class="bm-body" *ngIf="!successData">
+
+      <!-- Vehicle summary -->
+      <div class="bm-vehicle-summary" *ngIf="vehicle">
+        <div class="bm-vehicle-summary__left">
+          <span class="bm-vehicle-summary__name">{{ vehicle.name }}</span>
+          <span class="bm-vehicle-summary__meta">
+            {{ vehicle.categoryType }} &bull; {{ vehicle.transmission }} &bull; {{ vehicle.seats }} seats
+          </span>
+        </div>
+        <div class="bm-vehicle-summary__right">
+          <span class="bm-vehicle-summary__price">{{ formatPrice(vehicle.dailyRate) }}</span>
+          <span class="bm-vehicle-summary__unit">/day</span>
+        </div>
+      </div>
+
+      <!-- Dates summary -->
+      <div class="bm-dates" *ngIf="searchParams">
+        <div class="bm-dates__item">
+          <span class="bm-dates__label">Pickup</span>
+          <span class="bm-dates__value">{{ pickupDateFormatted }}</span>
+        </div>
+        <div class="bm-dates__sep">→</div>
+        <div class="bm-dates__item">
+          <span class="bm-dates__label">Return</span>
+          <span class="bm-dates__value">{{ returnDateFormatted }}</span>
+        </div>
+        <div class="bm-dates__total">
+          <span class="bm-dates__label">{{ estimatedDays }} day{{ estimatedDays !== 1 ? 's' : '' }}</span>
+          <span class="bm-dates__total-amount">{{ formatPrice(estimatedTotal) }}</span>
+        </div>
+      </div>
+
+      <!-- Error alert -->
+      <div class="bm-error-alert" *ngIf="errorMsg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        {{ errorMsg }}
+      </div>
+
+      <!-- Form fields -->
+      <div class="bm-form">
+        <div class="bm-field" [class.bm-field--error]="nameError">
+          <label class="bm-label" for="bm-name">Full name <span>*</span></label>
+          <input
+            id="bm-name"
+            type="text"
+            class="bm-input"
+            placeholder="e.g. Kasun Perera"
+            [(ngModel)]="customerName"
+            (input)="nameError = false"
+          />
+          <span class="bm-field__err" *ngIf="nameError">Please enter your name.</span>
+        </div>
+
+        <div class="bm-field" [class.bm-field--error]="contactError">
+          <label class="bm-label" for="bm-contact">Contact number <span>*</span></label>
+          <input
+            id="bm-contact"
+            type="tel"
+            class="bm-input"
+            placeholder="e.g. +94 77 123 4567"
+            [(ngModel)]="contactNumber"
+            (input)="contactError = false"
+          />
+          <span class="bm-field__err" *ngIf="contactError">Enter a valid phone number.</span>
+        </div>
+      </div>
+
+      <!-- Footer actions -->
+      <div class="bm-footer">
+        <button class="bm-btn bm-btn--ghost" (click)="close()" [disabled]="submitting">
+          Cancel
+        </button>
+        <button class="bm-btn bm-btn--primary" (click)="onSave()" [disabled]="submitting">
+          <span *ngIf="!submitting">Send request</span>
+          <span *ngIf="submitting" class="bm-spinner"></span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
